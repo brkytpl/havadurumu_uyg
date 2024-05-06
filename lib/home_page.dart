@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hava_durumu_app/search_page.dart';
 import 'package:http/http.dart' as http;
@@ -37,8 +39,13 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () async {
                     print(LocationData);
                     await getLocationData();
+                    debugPrint('getlocation çağrıldıktan sonra$LocationData');
+                    final locationDataParsed = jsonDecode(LocationData.body);
                     // Future.delayed(
                     // Duration(seconds: 3), (() => (print(LocationData))));
+                    print(locationDataParsed);
+                    print(locationDataParsed.runtimeType);
+                    print(locationDataParsed['main']['temp']);
                   },
                   child: Text('getLocationData')),
               Text(
