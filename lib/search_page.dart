@@ -9,8 +9,17 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  void birFonksiyon() {
+    print('bu fonksiyon çalıştı');
+  }
+
   @override
+  void initState() {
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
+    birFonksiyon();
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
@@ -40,6 +49,11 @@ class _SearchPageState extends State<SearchPage> {
             ],
           ),
         ),
+        floatingActionButton: FloatingActionButton(onPressed: () {
+          setState(() {
+            print('setStade yenilendi');
+          });
+        }),
       ),
     );
   }
