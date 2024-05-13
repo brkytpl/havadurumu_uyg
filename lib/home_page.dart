@@ -84,12 +84,14 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(fontSize: 30),
                         ),
                         IconButton(
-                            onPressed: () {
-                              Navigator.push(
+                            onPressed: () async {
+                              final selectedCity = await Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           const SearchPage()));
+                              location = selectedCity;
+                              getLocationData();
                             },
                             icon: Icon(Icons.search))
                       ],

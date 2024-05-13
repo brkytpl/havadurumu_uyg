@@ -9,17 +9,18 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  void birFonksiyon() {
+  String selectedCity = '';
+
+  /* void birFonksiyon() {
     print('bu fonksiyon çalıştı');
   }
 
   @override
   void initState() {
     super.initState();
-  }
+  }*/
 
   Widget build(BuildContext context) {
-    birFonksiyon();
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
@@ -32,28 +33,33 @@ class _SearchPageState extends State<SearchPage> {
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
-        body: const Center(
+        body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        hintText: 'Şehir Seçiniz',
-                        border:
-                            OutlineInputBorder(borderSide: BorderSide.none)),
-                    style: TextStyle(fontSize: 30),
-                    textAlign: TextAlign.center,
-                  ))
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                child: TextField(
+                  onChanged: (value) {
+                    selectedCity = value;
+                  },
+                  decoration: InputDecoration(
+                      hintText: 'Şehir Seçiniz',
+                      border: OutlineInputBorder(borderSide: BorderSide.none)),
+                  style: TextStyle(fontSize: 30),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context, selectedCity);
+                  print(selectedCity);
+                },
+                child: const Text('select City'),
+              )
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          setState(() {
-            print('setStade yenilendi');
-          });
-        }),
       ),
     );
   }
