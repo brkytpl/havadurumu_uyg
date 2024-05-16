@@ -51,9 +51,15 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context, selectedCity);
-                  print(selectedCity);
+                onPressed: () async {
+                  http.Response response = await http.get(Uri.parse(
+                      'https://api.openweathermap.org/data/2.5/weather?q=$selectedCity&appid=494fe3131500c2575b4a29bd0bf64241&units=metric'));
+                  if (response.statusCode == 200) {
+                    Navigator.pop(context, selectedCity);
+                    print(selectedCity);
+                  } else {
+                    _showMyDialog(context);
+                  }
                 },
                 child: const Text('select City'),
               )
@@ -63,4 +69,31 @@ class _SearchPageState extends State<SearchPage> {
       ),
     );
   }
+}
+
+Future<void> _showMyDialog(BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Location not found'),
+        content: const SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Please select a valid location.'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:hava_durumu_app/search_page.dart';
 import 'package:http/http.dart' as http;
